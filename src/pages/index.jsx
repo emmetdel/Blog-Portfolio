@@ -1,39 +1,63 @@
 import React from 'react';
-import { Link, graphql } from 'gatsby';
-import Bio from '../components/Bio';
-import Layout from '../components/Layout';
+import { graphql } from 'gatsby';
+import styled from 'styled-components';
 import SEO from '../components/seo';
-import { rhythm } from '../utils/typography';
+
+const Wrapper = styled.section`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Montserrat';
+
+  h1 {
+    margin-bottom: 12.5px;
+  }
+`;
+
+const LinksList = styled.ul`
+  list-style: none;
+  li {
+    padding: 0;
+    margin-bottom: 5px;
+  }
+`;
+
+const LinkAnchor = styled.a`
+  margin-bottom: 0px;
+  padding: 0;
+  &:focus,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+    color: black;
+  }
+  &:hover {
+    background-color: yellow;
+  }
+`;
 
 class BlogIndex extends React.Component {
   render() {
-    const { data, location } = this.props;
+    const { data } = this.props;
     const siteTitle = data.site.siteMetadata.title;
-    const posts = data.allMarkdownRemark.edges;
-
+    const links = ['Curriculum Vitae', 'Portfolio', 'Blog'];
     return (
-      <Layout location={location} title={siteTitle}>
+      <Wrapper>
         <SEO title="All posts" keywords={[`blog`, `gatsby`, `javascript`, `react`]} />
-        <Bio />
-        {posts.map(({ node }) => {
-          const title = node.frontmatter.title || node.fields.slug;
-          return (
-            <div key={node.fields.slug}>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
-              <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-            </div>
-          );
-        })}
-      </Layout>
+        <div>
+          <h1>{siteTitle}</h1>
+          <LinksList>
+            {links.map(link => (
+              <li>
+                <LinkAnchor href="asd">{link}</LinkAnchor>
+              </li>
+            ))}
+          </LinksList>
+        </div>
+      </Wrapper>
     );
   }
 }
@@ -45,20 +69,6 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
-      }
-    }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      edges {
-        node {
-          excerpt
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-          }
-        }
       }
     }
   }

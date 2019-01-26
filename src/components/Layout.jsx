@@ -13,24 +13,20 @@ class Layout extends React.Component {
 
     if (location.pathname === rootPath) {
       header = (
-        <h1
-          style={{
-            ...scale(1.5),
-            marginBottom: rhythm(1.5),
-            marginTop: 0,
-          }}
-        >
-          <Link
-            style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
-            }}
-            to="/"
-          >
-            {title}
-          </Link>
-        </h1>
+        <div>
+          <h1 style={{ ...scale(1.5), marginBottom: rhythm(1.5), marginTop: 0 }}>
+            <Link
+              style={{
+                boxShadow: `none`,
+                textDecoration: `none`,
+                color: `inherit`,
+              }}
+              to="/"
+            >
+              {title}
+            </Link>
+          </h1>
+        </div>
       );
     } else {
       header = (
@@ -56,19 +52,21 @@ class Layout extends React.Component {
     return (
       <div
         style={{
+          display: 'flex',
           marginLeft: `auto`,
           marginRight: `auto`,
-          maxWidth: rhythm(24),
+          maxWidth: rhythm(30),
           padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+          justifyContent: 'center',
         }}
       >
         {header}
         {children}
-        <footer>
+        {/* <footer>
           © {new Date().getFullYear()}, Built with
           {` `}
           <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+        </footer> */}
       </div>
     );
   }

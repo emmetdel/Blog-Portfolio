@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import SEO from '../components/seo';
 
 const Wrapper = styled.section`
@@ -10,6 +10,7 @@ const Wrapper = styled.section`
   justify-content: center;
   align-items: center;
   font-family: 'Montserrat';
+  background: linear-gradient(to right, #8e9eab, #eef2f3);
 `;
 
 const LinksList = styled.ul`
@@ -23,13 +24,9 @@ const LinksList = styled.ul`
 const LinkAnchor = styled.a`
   margin-bottom: 0px;
   padding: 0;
-  &:focus,
-  &:visited,
-  &:link,
-  &:active {
-    color: black;
-    border-bottom-width: 0;
-  }
+  color: black;
+  border-bottom-width: 0;
+
   &:hover {
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
     transition: 0.2s;
@@ -42,9 +39,22 @@ const LinkAnchor = styled.a`
   }
 `;
 
+const rotate = keyframes`
+  100% {
+    left:0px;
+    opacity: 1;
+  }
+`;
+
 const Title = styled.h1`
   margin-top: 2.5px;
   margin-bottom: 2px !important;
+  /* animation: ${rotate} forwards 0.8s; */
+  animation-timing-function: cubic-bezier(0.55, 1.15, 1, 1);
+  /* left: -1000px;
+  position: relative;
+  opacity: 0.1; */
+  font-weight: 400;
 `;
 const SubTitle = styled.h3`
   margin-top: 0;
@@ -52,6 +62,7 @@ const SubTitle = styled.h3`
   text-transform: lowercase;
   font-size: 0.9rem;
   color: #e65100;
+  font-weight: 400;
 `;
 
 class BlogIndex extends React.Component {

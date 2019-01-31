@@ -2,6 +2,8 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import styled, { keyframes } from 'styled-components';
 import SEO from '../components/seo';
+import Cartoon from '../myAvatar.svg';
+import Cartoon1 from '../myAvatar (1).svg';
 
 const Wrapper = styled.section`
   display: flex;
@@ -65,7 +67,36 @@ const SubTitle = styled.h3`
   font-weight: 400;
 `;
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const HeroAvatar = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  align-self: center;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+`;
+
 class BlogIndex extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      picture: Cartoon
+    };
+  }
+
+  changePicture = (bigEyes) => {
+    if(bigEyes){
+    this.setState({ picture: Cartoon });
+    }else{
+      this.setState({ picture: Cartoon1 });
+    }
+  };
+
   render() {
     const { data } = this.props;
     const siteTitle = data.site.siteMetadata.title;
@@ -86,7 +117,14 @@ class BlogIndex extends React.Component {
     return (
       <Wrapper>
         <SEO title="All posts" keywords={[`blog`, `gatsby`, `javascript`, `react`]} />
-        <div>
+        <Container>
+          <HeroAvatar 
+            src={this.state.picture} 
+            alt="me"
+            id="avatar"
+            onMouseEnter={() => this.changePicture(false)}
+            onMouseLeave={() => this.changePicture(true)}
+          />
           <Title>{siteTitle}</Title>
           <SubTitle>Software / Web Developer</SubTitle>
           <LinksList>
@@ -96,7 +134,7 @@ class BlogIndex extends React.Component {
               </li>
             ))}
           </LinksList>
-        </div>
+        </Container>
       </Wrapper>
     );
   }

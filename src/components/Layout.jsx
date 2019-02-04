@@ -1,73 +1,25 @@
-/* global __PATH_PREFIX__ */
-
 import React from 'react';
-import { Link } from 'gatsby';
+import styled from 'styled-components';
+import { HeroAvatar } from '../pages';
+import Cartoon from '../myAvatar.svg';
 
-import { rhythm, scale } from '../utils/typography';
+const Arrange = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-column-gap: 25px;
+`;
+
+const Sidebar = () => <HeroAvatar src={Cartoon} alt="me" id="avatar" />;
 
 class Layout extends React.Component {
   render() {
-    const { location, title, children } = this.props;
-    const rootPath = `${__PATH_PREFIX__}/`;
-    let header;
-
-    if (location.pathname === rootPath) {
-      header = (
-        <div>
-          <h1 style={{ ...scale(1.5), marginBottom: rhythm(1.5), marginTop: 0 }}>
-            <Link
-              style={{
-                boxShadow: `none`,
-                textDecoration: `none`,
-                color: `inherit`,
-              }}
-              to="/"
-            >
-              {title}
-            </Link>
-          </h1>
-        </div>
-      );
-    } else {
-      header = (
-        <h3
-          style={{
-            fontFamily: `Montserrat, sans-serif`,
-            marginTop: 0,
-          }}
-        >
-          <Link
-            style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
-            }}
-            to="/"
-          >
-            {title}
-          </Link>
-        </h3>
-      );
-    }
     return (
-      <div
-        style={{
-          display: 'flex',
-          marginLeft: `auto`,
-          marginRight: `auto`,
-          maxWidth: rhythm(30),
-          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-          justifyContent: 'center',
-        }}
-      >
-        {header}
-        {children}
-        {/* <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer> */}
-      </div>
+      <Arrange>
+        <div style={{ borderRight: '5px solid grey', height: '100vh' }}>
+          <Sidebar />
+        </div>
+        <div>content</div>
+      </Arrange>
     );
   }
 }

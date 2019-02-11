@@ -5,6 +5,7 @@ import SEO from '../components/seo';
 import Cartoon from '../myAvatar.svg';
 import Cartoon1 from '../myAvatar (1).svg';
 import NavList from '../components/shared/NavList';
+import links from '../data/nav-links';
 
 const Wrapper = styled.section`
   display: flex;
@@ -63,20 +64,7 @@ class BlogIndex extends React.Component {
   render() {
     const { data } = this.props;
     const siteTitle = data.site.siteMetadata.title;
-    const links = [
-      {
-        Name: 'Curriculum Vitae',
-        Href: '/cv',
-      },
-      {
-        Name: 'Portfolio',
-        Href: '/portfolio',
-      },
-      {
-        Name: 'Blog',
-        Href: '/blog',
-      },
-    ];
+
     return (
       <Wrapper>
         <SEO title="All posts" keywords={[`blog`, `gatsby`, `javascript`, `react`]} />
@@ -84,7 +72,7 @@ class BlogIndex extends React.Component {
           <HeroAvatar src={this.state.picture} alt="me" id="avatar" />
           <Title>{siteTitle}</Title>
           <SubTitle>Software / Web Developer</SubTitle>
-          <NavList links={links} changePicture={this.changePicture} />
+          <NavList links={links} />
         </Container>
       </Wrapper>
     );
